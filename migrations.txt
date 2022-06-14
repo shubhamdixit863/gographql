@@ -1,0 +1,37 @@
+-- Table: public.books
+
+-- DROP TABLE IF EXISTS public.books;
+
+CREATE TABLE IF NOT EXISTS public.books
+(
+    id integer NOT NULL DEFAULT nextval('t1_seq'::regclass),
+    title character(127) COLLATE pg_catalog."default" NOT NULL,
+    user_id integer,
+    CONSTRAINT books_pkey PRIMARY KEY (id),
+    CONSTRAINT fk_id FOREIGN KEY (user_id)
+        REFERENCES public.users (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+
+
+
+
+    -- Table: public.users
+
+    -- DROP TABLE IF EXISTS public.users;
+
+    CREATE TABLE IF NOT EXISTS public.users
+    (
+        id integer NOT NULL DEFAULT nextval('t2_seq'::regclass),
+        username character(127) COLLATE pg_catalog."default" NOT NULL,
+        password character(127) COLLATE pg_catalog."default" NOT NULL,
+        CONSTRAINT users_pkey PRIMARY KEY (id),
+        CONSTRAINT users_username_key UNIQUE (username)
+    )
+
+    TABLESPACE pg_default;
+

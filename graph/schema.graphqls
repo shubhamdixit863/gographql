@@ -1,0 +1,42 @@
+type Book {
+  id: ID!
+  title: String!
+  user:User!
+
+}
+
+type User {
+  id: ID!
+  name: String!
+}
+
+type Query {
+  books: [Book!]!
+}
+
+input NewBook {
+  title: String!
+
+}
+
+input RefreshTokenInput{
+  token: String!
+}
+
+input NewUser {
+  username: String!
+  password: String!
+}
+
+input Login {
+  username: String!
+  password: String!
+}
+
+type Mutation {
+  createBook(input: NewBook!): Book!
+  createUser(input: NewUser!): String!
+  login(input: Login!): String!
+
+  refreshToken(input: RefreshTokenInput!): String!
+}
