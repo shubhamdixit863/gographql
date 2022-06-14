@@ -27,6 +27,26 @@ func (user *User) Create() {
 }
 
 //GetUserIdByUsername check if a user exists in database by given username
+func (user *User) GetUserByUsername(username string) (int, error) {
+	statement, err := db.Db.Prepare("select ID from Users WHERE Username = $1")
+	if err != nil {
+		log.Fatal(err)
+	}
+	row := statement.QueryRow(username)
+
+	var Id int
+	err = row.Scan(&Id)
+	if err != nil {
+		if err != sql.ErrNoRows {
+			log.Print(err)
+		}
+		return 0, err
+	}
+
+	return Id, nil
+}
+
+//GetUserIdByUsername check if a user exists in database by given username
 func GetUserIdByUsername(username string) (int, error) {
 	statement, err := db.Db.Prepare("select ID from Users WHERE Username = $1")
 	if err != nil {

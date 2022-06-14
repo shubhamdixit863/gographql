@@ -71,6 +71,16 @@ func (r *mutationResolver) RefreshToken(ctx context.Context, input model.Refresh
 	}
 	return token, nil
 }
+func (r *mutationResolver) GetUserDetails(ctx context.Context) (*model.User, error) {
+	userauth := auth.ForContext(ctx)
+	if userauth == nil {
+		return nil, fmt.Errorf("access denied")
+	}
+
+	var user models.User
+	dbUSer, _ := user.GetUserByUsername(user.Username)
+	return &model.User{ID: string(dbUSer)}, nil
+}
 
 func (r *queryResolver) Books(ctx context.Context) ([]*model.Book, error) {
 	user := auth.ForContext(ctx)

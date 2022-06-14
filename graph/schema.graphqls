@@ -37,6 +37,7 @@ type Mutation {
   createBook(input: NewBook!): Book!
   createUser(input: NewUser!): String!
   login(input: Login!): String!
+  GetUserDetails():User!
 
   refreshToken(input: RefreshTokenInput!): String!
 }
