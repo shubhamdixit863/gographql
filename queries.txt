@@ -1,0 +1,29 @@
+mutation {
+  createBook(input: {title: "Some very new  990000 book"}){
+    user{
+      name
+    }
+  }
+}
+
+
+//first create user
+
+mutation {
+  createUser(input: {username: "logan",password:"1234"})
+}
+
+query {
+	books{
+    	title
+       user{
+      		name
+    	}
+  	}
+}
+
+
+
+mutation {
+  login(input: {username: "logan",password:"1234"})
+}
